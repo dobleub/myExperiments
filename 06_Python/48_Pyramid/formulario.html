@@ -1,0 +1,9 @@
+{% extends "ejemplo:templates/base.html" %}
+{% block contenido %}
+<form action="{{request.route_url('portada')}}" method="post">
+    <p>
+	<input type="text" name="nombre"/>
+	<button type="submit">enviar</button>
+    </p>
+</form>
+{% endblock %}

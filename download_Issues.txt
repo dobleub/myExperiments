@@ -1,0 +1,20 @@
+#!/bin/bash
+
+lm_user=$1
+shift
+lm_pass=$1
+shift 
+
+for issue 
+do
+    mkdir $issue
+    cd $issue
+    if wget --spider --http-user=$lm_user --http-password=$lm_pass http://www.linux-magazine.es/digital/issue/$issue/
+    then
+        wget -nd -r -H -l1 -erobots=off -A.pdf --http-user=$lm_user --http-password=$lm_pass http://www.linux-magazine.es/digital/issue/$issue/
+    elif wget --spider http://www.linux-magazine.es/issue/$issue/
+    then
+    	wget -nd -r -H -l1 -erobots=off -A.pdf http://www.linux-magazine.es/issue/$issue/
+    fi
+    cd ..
+done

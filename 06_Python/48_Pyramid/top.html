@@ -1,0 +1,35 @@
+{% extends "ejemplo:templates/base.html" %}
+{% block extrahead %}
+<script src="http://code.jquery.com/jquery-1.6.2.min.js"></script>
+<script src="http://cdn.socket.io/stable/socket.io.js"></script>
+ <script>
+    var socket = null;
+    var txt = null
+    $(function() {
+      socket = new io.Socket(null, {});
+      socket.on('connect', function() {
+        socket.send({type: "connect", userid: 123});
+      });
+      socket.on('message', function(obj) {
+    if (obj.type == "showdata") {
+    console.log("Message", JSON.stringify(obj));
+    txt = obj.txt;
+    $('#htop').html(txt);
+    }
+      });
+      socket.connect();
+    });
+  </script>
+<style>
+  #htop {
+  font-family: monospace; 
+  font-size: 12pt; 
+  background: black; 
+  color: green
+  }
+</style>
+{% endblock %}
+{% block contenido %}
+<h2>htop</h2>
+<pre id="htop" ></pre>
+{% endblock %}

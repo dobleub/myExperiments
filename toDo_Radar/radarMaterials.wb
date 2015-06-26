@@ -1,0 +1,53 @@
+CÓMO HACER UN RADAR
+
+Descripción del circuito
+
+El circuito emite una señal débil con un alcance de entre 500 y 2.000 metros consistente en un "Bip" de 0'5 segundos de duración cada 2 segundos.
+
+El circuito integrado IC1 es el encargado de generar los impulsos (Bip), se puede modificar la pauta de los impulsos modificando de valor de C1.
+
+El circuito integrado IC2 es el encargado de generar una señal audible que se utiliza como señal moduladora, se puede modificar el sonido modificando el valor de C3. 
+
+El circuito de radiofrecuencia está formado principalmente por un cristal de cuarzo (XTAL) que determina la frecuencia de trabajo del conjunto y por el circuito resonante formado por L1 y C9 que optimiza la señal de RF. El aumento de la potencia de transmisión se consigue con el transistor TR1. 
+
+El choque de RF (J1) se utiliza para bloquear el paso de la señal de FR hacia los circuitos integrados, lo que causaría su deterioro. 
+
+La antena se conecta diréctamente a la salida del condensador C10 marcado en el esquema como ANT, es necesario conectar a una toma de tierra o plano de tierra el punto marcado con el símbolo
+
+Alimentación
+
+El conjunto se alimenta 12 voltios en corriente continua, aunque funciona perfectamente con tensiones de 9 a 14 voltios. El consumo es muy bajo, por lo que puede utilizarse una pila alcalina de 9 V o un conjunto de pilas alcalinas de 1'5 V. 
+
+Ajuste del aparato
+
+Finalmente y como último paso en la construcción esta baliza, será necesario realizar un pequeño ajuste manipulando el condensador variable C9 hasta conseguir el máximo nivel de señal en un receptor de 27 MHz. situado a cierta distancia. 
+
+
+Lista de Materiales 
+
+R1	220 K
+R2	820 K
+R3, R5	1 K
+R4	100
+R6	8,2 K
+R7	5,6 K
+R8	15 K
+R9	33 K
+R10	100
+C1	2,2 µF 35 V tantalio
+C2, C4	22 µF 16 V electrolíticos
+C3	10 nF 50 V cerámico
+C5	1µF 50 V mylar o policarbonato
+C6	22 nF 50 V mylar o policarbonato
+C7	22 pF cerámico
+C8	82 pF cerámico
+C9	Timmer de 5 / 80 pF
+C10	47 pF cerámico
+J1	Choque de RF de 10 µH
+L1	12 espiras con diámetro interno de 6 mm., hilo de 0,6 mm.
+IC1, IC2	555
+TR1	2N2222
+D1	1N4148
+XTAL	Cristal de cuarzo de 27 MHz.
+
+Nota:Esta baliza fué diseñada para 27 Mhz pudiendo ser modificada para otras frecuencias 

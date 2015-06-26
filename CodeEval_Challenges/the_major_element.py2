@@ -1,0 +1,24 @@
+#! /usr/bin/env python
+# -*- coding: utf-8 -*-
+
+# THE MAJOR ELEMENT
+import sys
+from string import join
+
+test_cases = open(sys.argv[1], 'r')
+
+for test in test_cases:
+	l = test.split(",")
+	l = map(int,l)
+	l2 = [] 
+	[l2.append(int(n)) for n in l if int(n) not in l2]
+	c=0
+	for num in l2:
+		if l.count(num) > int(len(l)/2):
+			print num
+			c+=1
+	
+	if c==0:
+		print 'None'
+
+test_cases.close()
