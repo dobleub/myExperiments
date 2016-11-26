@@ -155,7 +155,7 @@ class Game:
 
 	def drawGrid(self, grid):
 		for x in grid:
-			print ' '.join(x)
+			print(' '.join(x))
 
 	def play(self):
 		if len(self._grid) <= 0:
@@ -168,7 +168,8 @@ class Game:
 		lastGrid = self._helpedGrid
 		for x in range(0,100):
 			time.sleep(0.5)
-			os.system('clear')
+			# os.system('clear')
+			os.system('cls')
 			self.checkGrid()
 			self.recreateGrid()
 			if lastGrid == self._helpedGrid:
