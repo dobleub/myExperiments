@@ -23,7 +23,13 @@
 #  
 
 import sys
+import math
 from functools import lru_cache
+
+def isPrime(n):
+	if n%2 == 0 and n > 2:
+		return False
+	return all(n%i for i in range(3, int(math.sqrt(n)) + 1, 2))
 
 fibonacci_cache = {}
 def fibonacciMemoizationExplicit(n):
@@ -63,10 +69,14 @@ def fibonacciMemoizationTrivial(n):
 		return fibonacciMemoizationTrivial(n-1) + fibonacciMemoizationTrivial(n-2)
 
 def main(args):
-	for n in range(1, 501):
+	limit = 501
+	for n in range(1, limit):
+		if(isPrime(n)):
+			print(n, 'is prime')
+	for n in range(1, limit):
 		print(n, ':', fibonacciMemoizationExplicit(n))
 	print('-'*50)
-	for n in range(1, 501):
+	for n in range(1, limit):
 		print(n, ':', fibonacciMemoizationTrivial(n))
 
 if __name__ == '__main__':
