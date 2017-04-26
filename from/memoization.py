@@ -69,15 +69,17 @@ def fibonacciMemoizationTrivial(n):
 		return fibonacciMemoizationTrivial(n-1) + fibonacciMemoizationTrivial(n-2)
 
 def main(args):
-	limit = 501
+	limit = 1001
 	for n in range(1, limit):
 		if(isPrime(n)):
 			print(n, 'is prime')
-	for n in range(1, limit):
-		print(n, ':', fibonacciMemoizationExplicit(n))
+	# print('-'*50)
+	# for n in range(1, limit):
+	# 	print(n, ':', fibonacciMemoizationExplicit(n))
 	print('-'*50)
 	for n in range(1, limit):
 		print(n, ':', fibonacciMemoizationTrivial(n))
+	
 
 if __name__ == '__main__':
     sys.exit(main(sys.argv))
