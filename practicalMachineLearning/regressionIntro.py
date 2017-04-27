@@ -25,19 +25,22 @@
 import pandas as pd
 import quandl, math
 import numpy as np
-from sklearn import preprocessing, cross_validation, svm
+from sklearn import preprocessing, model_selection, svm
 from sklearn.linear_model import LinearRegression
 
 def main():
 	# setting data frame
-	df = quandl.get('WIKI/GOOGL')
-	df = df[['Adj. Open','Adj. High','Adj. Low','Adj. Close','Adj. Volume']]
-	df['HL_PCT'] = (df['Adj. High'] - df['Adj. Close']) / df['Adj. Close'] * 100.0
-	df['PCT_change'] = (df['Adj. Close'] - df['Adj. Open']) / df['Adj. Open'] * 100.0
+	quandl.ApiConfig.api_key = 'AQ_X5HmEN_Wn1LNWCWfz'
+	df = quandl.get_table('WIKI/PRICES')
+	print(df.head())
+	df = df[['adj_open','adj_high','adj_low','adj_close','adj_volume']]
+	df['HL_PCT'] = (df['adj_high'] - df['adj_close']) / df['adj_close'] * 100.0
+	df['PCT_change'] = (df['adj_close'] - df['adj_open']) / df['adj_open'] * 100.0
+	exit()
 	
-	df = df[['Adj. Close', 'HL_PCT', 'PCT_change', 'Adj. Volume']]
+	df = df[['adj_close', 'HL_PCT', 'PCT_change', 'adj_volume']]
 	
-	forecast_col = 'Adj. Close'
+	forecast_col = 'adj_close'
 	df.fillna(-9999, inplace=True)
 	
 	forecast_out = int(math.ceil(0.01*len(df)))
@@ -48,8 +51,11 @@ def main():
 	X = numpy.array(df.drop('label', 1))
 	# label 
 	y = np.array(df['label'])
-	
-	X = preprocessing.scale(x)
+
+	X = preprocessing.scale(X)
+	X = X[:-forecast_out+1]
+	df.dropna(inplace=True)
+	y = np.array(df['label'])
 
 	print(df.tail())
 	
