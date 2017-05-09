@@ -132,10 +132,10 @@ def mejor_gen(poblacion, solucion):
 	return poblacion[ adaptacion.index(max(adaptacion)) ]
 
 def algoritmo_genetico():
-	# code here
-	max_iter = 10
-	max_poblacion = 50
-	num_vars = 10
+	"""Algoritmo Genético"""
+	max_iter = 20
+	max_poblacion = 70
+	num_vars = 30
 	fin = False
 	solucion = poblacion_inicial(1, num_vars)[0]
 	poblacion = poblacion_inicial(max_poblacion, num_vars)
