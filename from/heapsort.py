@@ -43,7 +43,7 @@ class Heapsort:
 
 		return self._items
 
-	def _heapify(self, end,i):
+	def _heapify(self, end, i):
 		l = 2 * i + 1
 		r = 2 * i + 2
 		max = i
@@ -63,7 +63,7 @@ class Heapsort:
 def main():
 	import random as r
 	items = []
-	for i in range(20):
+	for i in range(1000000):
 		items.append(r.randint(-1000,1000))
 	print(items)
 	h = Heapsort(items)
