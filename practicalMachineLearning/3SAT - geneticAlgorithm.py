@@ -133,9 +133,9 @@ def mejor_gen(poblacion, solucion):
 
 def algoritmo_genetico():
 	# code here
-	max_iter = 10
-	max_poblacion = 50
-	num_vars = 10
+	max_iter = 30
+	max_poblacion = 150
+	num_vars = 100
 	fin = False
 	solucion = poblacion_inicial(1, num_vars)[0]
 	poblacion = poblacion_inicial(max_poblacion, num_vars)
@@ -158,10 +158,11 @@ def algoritmo_genetico():
 	print("Solución : " + str(solucion))
 	mejor = mejor_gen(poblacion, solucion)
 
-	return mejor, adaptacion_3sat(mejor, solucion)
+	return mejor, solucion, adaptacion_3sat(mejor, solucion)
 
 if __name__ == '__main__':
 	r.seed()
 	mejor_gen = algoritmo_genetico()
 	print("Mejor gen : " + str(mejor_gen[0]))
-	print("Función de adaptación : " + str(mejor_gen[1]))
+	print("Son iguales : " + str(mejor_gen[0] == mejor_gen[1]))
+	print("Función de adaptación : " + str(mejor_gen[2]))
