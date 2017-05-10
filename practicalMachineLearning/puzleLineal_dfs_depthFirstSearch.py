@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 #
-#  vuelos_bfs.py
+#  puzleLineal_dfs_depthFirstSearch.py
 #  
 #  Copyright 2017 Edd Osorio <dobleub@debian>
 #  
@@ -21,51 +21,49 @@
 #  MA 02110-1301, USA.
 #  
 #  
-# Vuelos con busqueda en amplitud
+# Puzle lineal con busqueda en profundidad
 
 from arbol import Nodo
 
-def buscarSolucionBfs(conexiones, estadoInicial, solucion):
+def buscarSolucionDfs(estadoInicial, solucion):
 	solucionado = False
 	nodosVisitados = []
 	nodosFrontera = []
 	nodoInicial = Nodo(estadoInicial)
 	nodosFrontera.append(nodoInicial)
-	
+
 	while (not solucionado) and len(nodosFrontera) != 0:
-		nodo = nodosFrontera.pop(0)
+		nodo = nodosFrontera.pop()
 		nodosVisitados.append(nodo)
 		if nodo.getDatos() == solucion:
 			solucionado = True
 			return nodo
 		else:
-			# expandir nodos hijo (ciudades con conexion)
 			datoNodo = nodo.getDatos()
-			listaHijos = []
-			for unHijo in conexiones[datoNodo]:
-				hijo = Nodo(unHijo)
-				listaHijos.append(hijo)
-				if not hijo.enLista(nodosVisitados) and not hijo.enLista(nodosFrontera):
-					nodosFrontera.append(hijo)
-			nodo.setHijos(listaHijos)
+			# operador izquierdo
+			hijo = [datoNodo[1], datoNodo[0], datoNodo[2], datoNodo[3]]
+			hijoIzquierdo = Nodo(hijo)
+			if not hijoIzquierdo.enLista(nodosVisitados) and not hijoIzquierdo.enLista(nodosFrontera):
+				nodosFrontera.append(hijoIzquierdo)
+			# operados central
+			hijo = [datoNodo[0], datoNodo[2], datoNodo[1], datoNodo[3]]
+			hijoCentral = Nodo(hijo)
+			if not hijoCentral.enLista(nodosVisitados) and not hijoCentral.enLista(nodosFrontera):
+				nodosFrontera.append(hijoCentral)
+			#operador derecho
+			hijo = [datoNodo[0], datoNodo[1], datoNodo[3], datoNodo[2]]
+			hijoDerecho = Nodo(hijo)
+			if not hijoDerecho.enLista(nodosVisitados) and not hijoDerecho.enLista(nodosFrontera):
+				nodosFrontera.append(hijoDerecho)
+			
+			nodo.setHijos([hijoIzquierdo, hijoCentral, hijoDerecho])
 
 def main():
 	# code here
-	conexiones = {
-		'Malaga' : {'Salamanca', 'Madrid', 'Barcelona'},
-		'Sevilla' : {'Santiago', 'Madrid'},
-		'Granada' : {'Valencia'},
-		'Valencia' : {'Barcelona'},
-		'Madrid' : {'Salamanca', 'Sevilla', 'Malaga', 'Barcelona', 'Santander'},
-		'Salamanca' : {'Malaga', 'Madrid'},
-		'Santiago' : {'Sevilla', 'Santander', 'Barcelona'},
-		'Santander' : {'Santiago', 'Madrid'},
-		'Zaragoza' : {'Barcelona'},
-		'Barcelona' : {'Zaragoza', 'Santiago', 'Madrid', 'Malaga', 'Valencia'}
-	}
-	estadoInicial = 'Malaga'
-	solucion = 'Santiago'
-	nodoSolucion = buscarSolucionBfs(conexiones, estadoInicial, solucion)
+	estadoInicial = [4,2,3,1]
+	solucion = [1,2,3,4]
+	nodoSolucion = buscarSolucionDfs(estadoInicial, solucion)
+	# mostrar resultado
 	resultado = []
 	nodo = nodoSolucion
 	while nodo.getPadre() != None:
