@@ -40,7 +40,6 @@ def buscarSolucionBfs(conexiones, estadoInicial, solucion):
 			return nodo
 		else:
 			# expandir nodos hijo (ciudades con conexion)
-			# print(nodo.getDatos(), solucion, nodosFrontera, nodosVisitados)
 			datoNodo = nodo.getDatos()
 			listaHijos = []
 			for unHijo in conexiones[datoNodo]:
@@ -69,6 +68,7 @@ def main():
 	nodoSolucion = buscarSolucionBfs(conexiones, estadoInicial, solucion)
 	resultado = []
 	nodo = nodoSolucion
+
 	while nodo.getPadre() != None:
 		resultado.append(nodo.getDatos())
 		nodo = nodo.getPadre()
